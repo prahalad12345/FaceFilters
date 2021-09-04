@@ -96,8 +96,8 @@ int main(int argc, char* argv[])
     merge(glassRGBchannel,3,opencvimg);
 
     //reading the haar files
-    string faceCascadeName = "face.xml";
-    string eyeCascadeName = "eye.xml";
+    string faceCascadeName = "./haarcascade/face.xml";
+    string eyeCascadeName = "./haarcascade/eye.xml";
 
     CascadeClassifier faceCascade, eyeCascade;
     faceCascade.load(faceCascadeName) ;

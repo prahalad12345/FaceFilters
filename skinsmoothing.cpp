@@ -16,7 +16,7 @@ int main(int argc, char* argv[])
     Mat img=imread("./images/2.jpg");
 
     //reading the haar files
-    string faceCascadeName = "face.xml";
+    string faceCascadeName = "./haarcascade/face.xml";
 
     CascadeClassifier faceCascade;
     faceCascade.load(faceCascadeName) ;
