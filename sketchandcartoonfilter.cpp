@@ -58,9 +58,9 @@ Mat pencilSketch(Mat image){
 
 
 int main(int argc, char *argv[]){
-    Mat image=imread("../images/2.jpg");
+    Mat image=imread("./images/2.jpg");
     Mat pencilimage=pencilSketch(image);
-    imwrite("../images/pencilsketch.jpg",pencilimage);
+    imwrite("./images/pencilsketch.jpg",pencilimage);
     Mat cartoonimage=cartoonify(image);
-    imwrite("../image/cartoonify.jpg",cartoonimage);
+    imwrite("./image/cartoonify.jpg",cartoonimage);
 }

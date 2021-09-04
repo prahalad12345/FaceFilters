@@ -28,7 +28,7 @@ void onMouse(int event,int x,int y,int flag,void*){
 }
 
 int main(){
-    bgr=imread("../images/1.png");//input file containing the blemish
+    bgr=imread("./images/1.png");//input file containing the blemish
 
     namedWindow("I Remove Blemish");
 

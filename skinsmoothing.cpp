@@ -13,7 +13,7 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-    Mat img=imread("../images/2.jpg");
+    Mat img=imread("./images/2.jpg");
 
     //reading the haar files
     string faceCascadeName = "face.xml";

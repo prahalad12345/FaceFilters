@@ -82,12 +82,12 @@ void eyeglass(int , void *){
 
 int main(int argc, char* argv[])
 {
-    frame=imread("../images/2.jpg");
+    frame=imread("./images/2.jpg");
     namedWindow("Frame",WINDOW_AUTOSIZE);
     imshow("Frame",frame);
-    Mat openc=imread("../images/0.jpg");
-    bubble=imread("../images/3.jpg");
-    Mat eyeMask = imread("../images/sunglass.png");
+    Mat openc=imread("./images/0.jpg");
+    bubble=imread("./images/3.jpg");
+    Mat eyeMask = imread("./images/sunglass.png");
 
     cvtColor(openc,openc,COLOR_BGR2GRAY);
     Mat glassRGBchannel[3];
