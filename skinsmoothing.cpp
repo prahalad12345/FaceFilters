@@ -43,7 +43,7 @@ int main(int argc, char* argv[])
     Vec3b lower={11,70,60};
     Vec3b upper={11,70,60};
     lower=huecolor-lower;
-    
+    upper=huecolor+upper;
     Mat resultskin,skin;
     //skin stores the region where the skin is present acts like a mask for the skin
     Mat notskin,resultnotskin;
