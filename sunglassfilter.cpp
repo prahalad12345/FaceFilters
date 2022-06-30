@@ -5,8 +5,10 @@
 
 #define CV_HAAR_SCALE_IMAGE 2
 /*
+PLEASE READ THIS MULTI LINE COMMENT
 
-using haar cascade to detect the eye region
+I have used haar cascade to detect the eye region
+
 INSTRUCTIONS:
 1.Please set the Reflection of sunglass trackbar To provide the zebra striping on the sunglass
 2.Now set the alpha of Bubble trackbar to set the transparency of bubble wrt the glass
@@ -21,8 +23,6 @@ change "Reflection on the glass"->"alpha of Bubbles"->"Transparency wrt Eye and 
 
 Not following the above order leads to repeating the process again
 
-Used frame with an alpha channel for ease
-
 THANK YOU FOR YOUR PATIENCE
 */
 using namespace cv;
@@ -33,13 +33,14 @@ Mat maskedEye;//The output after thresholding on the sunglass's alpha mask and s
 Mat maskedFrame;//consist of the background of the rectangle frame
 Mat blendercv;//stores the result from the eyecv function
 Mat opencvimg;//stores the image of the high contrast image
-Mat opencvframe;//frame for the reflection image
+Mat opencvframe;//
 Mat bubble;//image of the bubble
 Mat bubbleframe;//bubble image obtained on the sunglass mask
 Mat blendbubble;//final image obtained in the blenderbubble function
 Mat eyethreshold;//image of the eye in the sunglass mask
 int scalefactor=0,glassscalefactor=0,bubblefactor=0;
 int x,w,y,h;
+Mat elon;
 
 //eyecv is the function dealing with the reflection on the glass
 
@@ -48,6 +49,7 @@ void eyecv(int,void*){
     addWeighted(opencvframe,blendcv,maskedEye,1.0-blendcv,0.0,blendercv);
     imshow("blenderercv",blendercv);
     add(blendercv, maskedFrame, frame(Rect(x,y,w,h)));
+    cout<<frame.size()<<endl;
     imshow("Frame",frame);
 }
 
@@ -82,12 +84,16 @@ void eyeglass(int , void *){
 
 int main(int argc, char* argv[])
 {
-    frame=imread("./images/2.jpg");
+    //frame=imread("elon.jpg");
+    //cout<<frame.channels()<<endl;
+    frame=imread("images/elon.jpg");
+    //cout<<elon.channels()<<endl;
     namedWindow("Frame",WINDOW_AUTOSIZE);
     imshow("Frame",frame);
-    Mat openc=imread("./images/0.jpg");
-    bubble=imread("./images/3.jpg");
-    Mat eyeMask = imread("./images/sunglass.png");
+    cout<<frame.size();
+    Mat openc=imread("images/zebra.jpg");
+    bubble=imread("images/bubb.jpg");
+    Mat eyeMask = imread("images/sunglass.png");
 
     cvtColor(openc,openc,COLOR_BGR2GRAY);
     Mat glassRGBchannel[3];
@@ -96,8 +102,8 @@ int main(int argc, char* argv[])
     merge(glassRGBchannel,3,opencvimg);
 
     //reading the haar files
-    string faceCascadeName = "./haarcascade/face.xml";
-    string eyeCascadeName = "./haarcascade/eye.xml";
+    string faceCascadeName = "haarcascade/face.xml";
+    string eyeCascadeName = "haarcascade/eye.xml";
 
     CascadeClassifier faceCascade, eyeCascade;
     faceCascade.load(faceCascadeName) ;
@@ -118,12 +124,13 @@ int main(int argc, char* argv[])
         eyeCascade.detectMultiScale(faceROI, eyes, 1.1, 2, 0 |CV_HAAR_SCALE_IMAGE, Size(30, 30));
         for(int j = 0; j < eyes.size(); j++){
             Point center( faces[i].x + eyes[j].x + int(eyes[j].width*0.5), faces[i].y + eyes[j].y + int(eyes[j].height*0.5) );
+            circle(faceROI,center,1,Scalar(0,255,0),5,LINE_AA);
             centers.push_back(center);
+            if(centers.size()==2)
+                break;
         }
-        if(centers.size()==2)
-            break;
     }
-
+    cout<<centers.size()<<endl;
     if(centers.size() == 2){
         Point leftPoint, rightPoint;
     
